@@ -40,7 +40,26 @@ model Pet {
   levelOfIndependence PET_INDEPENDENCE
   environment         PET_SIZE
 
+  org_id String
+  org    Org    @relation(fields: [org_id], references: [id])
+
   created_at DateTime @default(now())
 
   @@map("pets")
+}
+
+model Org {
+  id String @id @default(uuid())
+
+  name          String
+  email         String @unique
+  zipcode       String
+  address       String
+  phone         String
+  password_hash String
+
+  created_at DateTime @default(now())
+  pets       Pet[]
+
+  @@map("orgs")
 }
