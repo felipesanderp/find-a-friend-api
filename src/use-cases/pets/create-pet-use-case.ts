@@ -1,3 +1,4 @@
+import { OrgsRepository } from '@/repositories/orgs-repository'
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from '@prisma/client'
 
@@ -9,6 +10,7 @@ interface CreatePetUseCaseRequest {
   levelOfIndependence: 'MEDIUM' | 'LOW' | 'HIGH'
   levelOfEnergy: number
   environment: 'SMALL' | 'MEDIUM' | 'BIG'
+  org_id: string
 }
 
 interface CreatePetUseCaseResponse {
@@ -16,7 +18,10 @@ interface CreatePetUseCaseResponse {
 }
 
 export class CreatePetUseCase {
-  constructor(private petsRepository: PetsRepository) {}
+  constructor(
+    private petsRepository: PetsRepository,
+    private orgsRepository: OrgsRepository,
+  ) {}
 
   async execute({
     name,
@@ -26,7 +31,14 @@ export class CreatePetUseCase {
     levelOfIndependence,
     levelOfEnergy,
     environment,
+    org_id,
   }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
+    const org = await this.orgsRepository.findById(org_id)
+
+    if (!org) {
+      throw new Error()
+    }
+
     const pet = await this.petsRepository.create({
       name,
       description,
@@ -35,6 +47,7 @@ export class CreatePetUseCase {
       levelOfIndependence,
       levelOfEnergy,
       environment,
+      org_id,
     })
 
     return {
