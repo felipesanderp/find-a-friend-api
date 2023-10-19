@@ -39,11 +39,11 @@ model Pet {
 
   name                String
   description         String
-  age                 PET_AGE          @default(CUB)
-  size                PET_SIZE         @default(SMALL)
+  age                 PET_AGE
+  size                PET_SIZE
   levelOfEnergy       Int
-  levelOfIndependence PET_INDEPENDENCE @default(LOW)
-  environment         PET_ENVIRONMENT  @default(SMALL)
+  levelOfIndependence PET_INDEPENDENCE
+  environment         PET_ENVIRONMENT
 
   created_at DateTime @default(now())
 
