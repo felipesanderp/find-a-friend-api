@@ -11,9 +11,10 @@ datasource db {
 }
 
 enum PET_AGE {
-  CUB
+  BABY
   YOUNG
   ADULT
+  SENIOR
 }
 
 enum PET_SIZE {
@@ -24,14 +25,8 @@ enum PET_SIZE {
 
 enum PET_INDEPENDENCE {
   LOW
-  MODERATE
-  HIGH
-}
-
-enum PET_ENVIRONMENT {
-  SMALL
   MEDIUM
-  WIDE
+  HIGH
 }
 
 model Pet {
@@ -43,7 +38,7 @@ model Pet {
   size                PET_SIZE
   levelOfEnergy       Int
   levelOfIndependence PET_INDEPENDENCE
-  environment         PET_ENVIRONMENT
+  environment         PET_SIZE
 
   created_at DateTime @default(now())
 

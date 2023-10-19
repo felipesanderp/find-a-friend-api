@@ -1,11 +1,5 @@
 import { PetsRepository } from '@/repositories/pets-repository'
-import {
-  PET_AGE,
-  PET_ENVIRONMENT,
-  PET_INDEPENDENCE,
-  PET_SIZE,
-  Pet,
-} from '@prisma/client'
+import { PET_AGE, PET_INDEPENDENCE, PET_SIZE, Pet } from '@prisma/client'
 
 interface CreatePetUseCaseRequest {
   name: string
@@ -14,7 +8,7 @@ interface CreatePetUseCaseRequest {
   size: PET_SIZE
   levelOfIndependence: PET_INDEPENDENCE
   levelOfEnergy: number
-  environment: PET_ENVIRONMENT
+  environment: PET_SIZE
 }
 
 interface CreatePetUseCaseResponse {

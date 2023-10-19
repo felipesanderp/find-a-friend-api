@@ -15,11 +15,11 @@ describe('Create Pet Use Case', async () => {
     const { pet } = await sut.execute({
       name: 'Cachorrinho fofinho',
       description: 'destrói tudo que vê pela frente',
-      age: 'CUB',
+      age: 'BABY',
       levelOfEnergy: 3,
       size: 'SMALL',
-      levelOfIndependence: 'MODERATE',
-      environment: 'WIDE',
+      levelOfIndependence: 'MEDIUM',
+      environment: 'MEDIUM',
     })
 
     expect(pet.id).toEqual(expect.any(String))
