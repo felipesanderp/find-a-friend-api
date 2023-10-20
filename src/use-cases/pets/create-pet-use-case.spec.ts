@@ -33,6 +33,10 @@ describe('Create Pet Use Case', async () => {
       levelOfIndependence: 'MEDIUM',
       environment: 'MEDIUM',
       org_id: org.id,
+      type: 'DOG',
+      images: [],
+      requisites: ['Espaço amplo'],
+      city: 'Curitiba',
     })
 
     expect(pet.id).toEqual(expect.any(String))

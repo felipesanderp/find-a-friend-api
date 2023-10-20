@@ -21,6 +21,10 @@ describe('Get Pets Use Case', async () => {
       levelOfIndependence: 'MEDIUM',
       environment: 'MEDIUM',
       org_id: '',
+      type: 'DOG',
+      images: [],
+      requisites: ['Espaço amplo'],
+      city: 'Curitiba',
     })
 
     await petsRepository.create({
@@ -32,10 +36,15 @@ describe('Get Pets Use Case', async () => {
       levelOfIndependence: 'LOW',
       environment: 'BIG',
       org_id: '',
+      type: 'CAT',
+      images: [],
+      requisites: ['Espaço amplo'],
+      city: 'Curitiba',
     })
 
     const { pets } = await sut.execute({
       age: 'BABY',
+      city: 'Curitiba',
     })
 
     expect(pets).toEqual([
