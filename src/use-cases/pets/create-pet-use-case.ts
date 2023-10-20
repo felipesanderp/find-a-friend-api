@@ -1,6 +1,7 @@
 import { OrgsRepository } from '@/repositories/orgs-repository'
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from '@prisma/client'
+import { OrgDoesNotExistsError } from '../errors/org-does-not-exists-error'
 
 interface CreatePetUseCaseRequest {
   name: string
@@ -36,7 +37,7 @@ export class CreatePetUseCase {
     const org = await this.orgsRepository.findById(org_id)
 
     if (!org) {
-      throw new Error()
+      throw new OrgDoesNotExistsError()
     }
 
     const pet = await this.petsRepository.create({
