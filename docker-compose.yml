@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  api-findafriend-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=api_user
+      - POSTGRESQL_PASSWORD=this_is_the_password@@
+      - POSTGRESSQL_DATABASE=findafriendapi
