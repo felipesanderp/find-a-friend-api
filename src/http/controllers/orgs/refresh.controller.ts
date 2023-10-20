@@ -9,7 +9,7 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
     {},
     {
       sign: {
-        sub: 'request.org.sub',
+        sub: request.user.sub,
       },
     },
   )
@@ -18,7 +18,7 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
     {},
     {
       sign: {
-        sub: 'request.org.sub',
+        sub: request.user.sub,
         expiresIn: '7d',
       },
     },
