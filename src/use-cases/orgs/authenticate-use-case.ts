@@ -8,7 +8,7 @@ interface AuthenticateUseCaseRequest {
   password: string
 }
 
-interface AuthenticateUseCaseResponse {
+export interface AuthenticateUseCaseResponse {
   org: Org
 }
 
