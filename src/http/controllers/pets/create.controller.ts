@@ -9,11 +9,15 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createPetBodySchema = z.object({
     name: z.string(),
     description: z.string(),
+    images: z.array(z.string()),
+    requisites: z.array(z.string()),
     age: z.enum(['BABY', 'YOUNG', 'ADULT', 'SENIOR']),
     levelOfEnergy: z.number().min(1).max(5),
     environment: z.enum(['SMALL', 'MEDIUM', 'BIG']),
     levelOfIndependence: z.enum(['LOW', 'MEDIUM', 'HIGH']),
     size: z.enum(['SMALL', 'MEDIUM', 'BIG']),
+    type: z.enum(['DOG', 'CAT', 'OTHER']),
+    city: z.string(),
   })
   const pet = createPetBodySchema.parse(request.body)
 

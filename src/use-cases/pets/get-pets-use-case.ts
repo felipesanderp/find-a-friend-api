@@ -10,7 +10,7 @@ interface GetPetsUseCaseRequest {
   environment?: 'SMALL' | 'MEDIUM' | 'BIG'
   type?: 'DOG' | 'CAT' | 'OTHER'
   org_id?: string
-  city: string
+  city?: string
 }
 
 interface GetPetsUseCaseResponse {
