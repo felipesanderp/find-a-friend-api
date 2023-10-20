@@ -29,16 +29,26 @@ enum PET_INDEPENDENCE {
   HIGH
 }
 
+enum PET_TYPE {
+  DOG
+  CAT
+  OTHER
+}
+
 model Pet {
   id String @id @default(uuid())
 
   name                String
   description         String
+  images              String[]
+  requisites          String[]
+  type                PET_TYPE
   age                 PET_AGE
   size                PET_SIZE
   levelOfEnergy       Int
   levelOfIndependence PET_INDEPENDENCE
   environment         PET_SIZE
+  city                String
 
   org_id String
   org    Org    @relation(fields: [org_id], references: [id])

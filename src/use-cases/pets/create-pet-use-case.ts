@@ -6,6 +6,10 @@ import { OrgDoesNotExistsError } from '../errors/org-does-not-exists-error'
 interface CreatePetUseCaseRequest {
   name: string
   description: string
+  images: string[]
+  requisites: string[]
+  city: string
+  type: 'DOG' | 'CAT' | 'OTHER'
   age: 'BABY' | 'YOUNG' | 'ADULT' | 'SENIOR'
   size: 'SMALL' | 'MEDIUM' | 'BIG'
   levelOfIndependence: 'MEDIUM' | 'LOW' | 'HIGH'
@@ -27,6 +31,10 @@ export class CreatePetUseCase {
   async execute({
     name,
     description,
+    images,
+    requisites,
+    city,
+    type,
     age,
     size,
     levelOfIndependence,
@@ -49,6 +57,14 @@ export class CreatePetUseCase {
       levelOfEnergy,
       environment,
       org_id,
+      images: {
+        set: images,
+      },
+      requisites: {
+        set: requisites,
+      },
+      city,
+      type,
     })
 
     return {

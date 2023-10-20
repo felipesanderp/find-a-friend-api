@@ -18,11 +18,19 @@ export class InMemoryPetsRepository implements PetsRepository {
 
   async getPets(query: GetPetsQuery, page = 1) {
     const petsFiltered = this.items.filter((item) => {
+      if (query.type && query.type !== item.type) {
+        return false
+      }
+
       if (query.age && query.age !== item.age) {
         return false
       }
 
       if (query.size && query.size !== item.size) {
+        return false
+      }
+
+      if (query.city && !item.city.includes(query.city)) {
         return false
       }
 
@@ -62,6 +70,10 @@ export class InMemoryPetsRepository implements PetsRepository {
       levelOfEnergy: data.levelOfEnergy,
       environment: data.environment,
       org_id: data.org_id,
+      images: data.images as string[],
+      requisites: data.requisites as string[],
+      city: data.city,
+      type: data.type,
       created_at: new Date(),
     }
 
