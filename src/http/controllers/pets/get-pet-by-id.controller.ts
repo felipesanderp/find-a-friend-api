@@ -17,7 +17,7 @@ export async function getPetById(request: FastifyRequest, reply: FastifyReply) {
       petId,
     })
 
-    return reply.status(201).send(pet)
+    return reply.status(200).send(pet)
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(400).send({
