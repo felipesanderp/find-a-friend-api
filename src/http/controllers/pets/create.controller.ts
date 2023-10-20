@@ -8,7 +8,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const createPetBodySchema = z.object({
     name: z.string(),
-    city: z.string(),
     description: z.string(),
     age: z.enum(['BABY', 'YOUNG', 'ADULT', 'SENIOR']),
     levelOfEnergy: z.number().min(1).max(5),
