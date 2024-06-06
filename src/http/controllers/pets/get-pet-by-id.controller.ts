@@ -5,16 +5,16 @@ import { z } from 'zod'
 
 export async function getPetById(request: FastifyRequest, reply: FastifyReply) {
   const getPetByIdParamsSchema = z.object({
-    petId: z.string().uuid(),
+    id: z.string().uuid(),
   })
 
-  const { petId } = getPetByIdParamsSchema.parse(request.params)
+  const { id } = getPetByIdParamsSchema.parse(request.params)
 
   try {
     const getPetByIdUseCase = makeGetPetByIdUseCase()
 
     const pet = await getPetByIdUseCase.execute({
-      petId,
+      id,
     })
 
     return reply.status(200).send(pet)
