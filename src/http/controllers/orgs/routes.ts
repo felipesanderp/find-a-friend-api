@@ -23,6 +23,9 @@ export async function orgRoutes(app: FastifyInstance) {
         }),
         response: {
           201: z.null(),
+          409: z.object({
+            message: z.string(),
+          }),
         },
       },
     },
@@ -42,6 +45,9 @@ export async function orgRoutes(app: FastifyInstance) {
         response: {
           200: z.object({
             token: z.string(),
+          }),
+          400: z.object({
+            message: z.string(),
           }),
         },
       },
