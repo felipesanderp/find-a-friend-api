@@ -16,13 +16,17 @@ export class PrismaPetsRepository implements PetsRepository {
   async getPets(query: GetPetsQuery, page?: number | undefined) {
     const pets = await prisma.pet.findMany({
       where: {
-        type: query.type,
-        age: query.age,
-        size: query.size,
-        levelOfEnergy: query.levelOfEnergy,
-        levelOfIndependence: query.levelOfIndependence,
-        environment: query.environment,
-        org_id: query.org_id,
+        type: query.type !== null ? query.type : undefined,
+        age: query.age !== null ? query.age : undefined,
+        size: query.size !== null ? query.size : undefined,
+        levelOfEnergy:
+          query.levelOfEnergy !== null ? query.levelOfEnergy : undefined,
+        levelOfIndependence:
+          query.levelOfIndependence !== null
+            ? query.levelOfIndependence
+            : undefined,
+        environment: query.environment !== null ? query.environment : undefined,
+        // org_id: query.org_id !== null ? query.org_id : undefined,
         city: query.city,
       },
       skip: page ? (page - 1) * 10 : undefined,

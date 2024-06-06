@@ -9,8 +9,9 @@ interface GetPetsUseCaseRequest {
   levelOfEnergy?: number
   environment?: 'SMALL' | 'MEDIUM' | 'BIG'
   type?: 'DOG' | 'CAT' | 'OTHER'
-  org_id?: string
+  // org_id?: string
   city?: string
+  page: number
 }
 
 interface GetPetsUseCaseResponse {
@@ -26,24 +27,28 @@ export class GetPetsUseCase {
     levelOfIndependence,
     levelOfEnergy,
     environment,
-    org_id,
+    // org_id,
     type,
     city,
+    page,
   }: GetPetsUseCaseRequest): Promise<GetPetsUseCaseResponse> {
     if (!city) {
       throw new CityQueryParamIsRequiredError()
     }
 
-    const pets = await this.petsRepository.getPets({
-      age,
-      size,
-      levelOfIndependence,
-      levelOfEnergy,
-      environment,
-      org_id,
-      city,
-      type,
-    })
+    const pets = await this.petsRepository.getPets(
+      {
+        age,
+        size,
+        levelOfIndependence,
+        levelOfEnergy,
+        environment,
+        // org_id,
+        city,
+        type,
+      },
+      page,
+    )
 
     return {
       pets,

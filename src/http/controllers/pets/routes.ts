@@ -19,41 +19,22 @@ export async function petsRoutes(app: FastifyInstance) {
         }),
         response: {
           200: z.object({
-            id: z.string().uuid(),
-            name: z.string(),
-            description: z.string(),
-            images: z.array(z.string()),
-            requisites: z.array(z.string()),
-            type: z.union([
-              z.literal('DOG'),
-              z.literal('CAT'),
-              z.literal('OTHER'),
-            ]),
-            age: z.union([
-              z.literal('BABY'),
-              z.literal('YOUNG'),
-              z.literal('ADULT'),
-              z.literal('SENIOR'),
-            ]),
-            size: z.union([
-              z.literal('SMALL'),
-              z.literal('MEDIUM'),
-              z.literal('BIG'),
-            ]),
-            levelOfEnergy: z.number(),
-            levelOfIndependence: z.union([
-              z.literal('LOW'),
-              z.literal('MEDIUM'),
-              z.literal('HIGH'),
-            ]),
-            environment: z.union([
-              z.literal('SMALL'),
-              z.literal('MEDIUM'),
-              z.literal('BIG'),
-            ]),
-            city: z.string(),
-            org_id: z.string().uuid(),
-            created_at: z.date(),
+            pet: z.object({
+              id: z.string().uuid(),
+              name: z.string(),
+              description: z.string(),
+              images: z.array(z.string()),
+              requisites: z.array(z.string()),
+              type: z.enum(['DOG', 'CAT', 'OTHER']),
+              age: z.enum(['BABY', 'YOUNG', 'ADULT', 'SENIOR']),
+              size: z.enum(['SMALL', 'MEDIUM', 'BIG']),
+              levelOfEnergy: z.number(),
+              levelOfIndependence: z.enum(['LOW', 'MEDIUM', 'HIGH']),
+              environment: z.enum(['SMALL', 'MEDIUM', 'BIG']),
+              city: z.string(),
+              org_id: z.string().uuid(),
+              created_at: z.date(),
+            }),
           }),
           400: z.object({
             message: z.string(),
@@ -71,28 +52,13 @@ export async function petsRoutes(app: FastifyInstance) {
         tags: ['Pet'],
         summary: 'Get pets',
         querystring: z.object({
-          city: z.string().optional(),
-          age: z
-            .union([
-              z.literal('BABY'),
-              z.literal('YOUNG'),
-              z.literal('ADULT'),
-              z.literal('SENIOR'),
-            ])
-            .optional(),
-          levelOfEnergy: z.number().min(1).max(5).optional(),
-          environment: z
-            .union([z.literal('SMALL'), z.literal('MEDIUM'), z.literal('BIG')])
-            .optional(),
-          levelOfIndependence: z
-            .union([z.literal('LOW'), z.literal('MEDIUM'), z.literal('HIGH')])
-            .optional(),
-          size: z
-            .union([z.literal('SMALL'), z.literal('MEDIUM'), z.literal('BIG')])
-            .optional(),
-          type: z
-            .union([z.literal('DOG'), z.literal('CAT'), z.literal('OTHER')])
-            .optional(),
+          city: z.string(),
+          levelOfEnergy: z.coerce.number().optional(),
+          environment: z.enum(['SMALL', 'MEDIUM', 'BIG']).optional(),
+          levelOfIndependence: z.enum(['LOW', 'MEDIUM', 'HIGH']).optional(),
+          type: z.enum(['DOG', 'CAT', 'OTHER']).optional(),
+          age: z.enum(['BABY', 'YOUNG', 'ADULT', 'SENIOR']).optional(),
+          size: z.enum(['SMALL', 'MEDIUM', 'BIG']).optional(),
         }),
         response: {
           200: z.object({
@@ -103,33 +69,12 @@ export async function petsRoutes(app: FastifyInstance) {
                 description: z.string(),
                 images: z.array(z.string()),
                 requisites: z.array(z.string()),
-                type: z.union([
-                  z.literal('DOG'),
-                  z.literal('CAT'),
-                  z.literal('OTHER'),
-                ]),
-                age: z.union([
-                  z.literal('BABY'),
-                  z.literal('YOUNG'),
-                  z.literal('ADULT'),
-                  z.literal('SENIOR'),
-                ]),
-                size: z.union([
-                  z.literal('SMALL'),
-                  z.literal('MEDIUM'),
-                  z.literal('BIG'),
-                ]),
+                type: z.enum(['DOG', 'CAT', 'OTHER']),
+                age: z.enum(['BABY', 'YOUNG', 'ADULT', 'SENIOR']),
+                size: z.enum(['SMALL', 'MEDIUM', 'BIG']),
                 levelOfEnergy: z.number().min(1).max(5),
-                levelOfIndependence: z.union([
-                  z.literal('LOW'),
-                  z.literal('MEDIUM'),
-                  z.literal('HIGH'),
-                ]),
-                environment: z.union([
-                  z.literal('SMALL'),
-                  z.literal('MEDIUM'),
-                  z.literal('BIG'),
-                ]),
+                levelOfIndependence: z.enum(['LOW', 'MEDIUM', 'HIGH']),
+                environment: z.enum(['SMALL', 'MEDIUM', 'BIG']),
                 city: z.string(),
                 org_id: z.string().uuid(),
                 created_at: z.date(),
